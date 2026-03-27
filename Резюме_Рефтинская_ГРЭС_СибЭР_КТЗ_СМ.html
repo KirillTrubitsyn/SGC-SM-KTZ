@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме | Рефтинская ГРЭС — Замена поставщика и мировое соглашение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --primary: #1a2a3a;
+    --secondary: #2d4a5e;
+    --accent: #c9a227;
+    --accent-light: #e8d49c;
+    --bg: #f8f6f1;
+    --card-bg: #ffffff;
+    --text: #2c3e50;
+    --text-light: #5a6a7a;
+    --success: #27ae60;
+    --danger: #c0392b;
+    --warning: #f39c12;
+    --border: #e0ddd5;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 1.5rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.header-content { max-width: 800px; margin: 0 auto; }
+
+.case-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--primary);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.header-meta { font-size: 0.85rem; opacity: 0.9; }
+
+.nav-container {
+    background: var(--card-bg);
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border);
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav-pills {
+    display: inline-flex;
+    gap: 0.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.nav-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.9rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    font-family: 'Source Sans 3', sans-serif;
+}
+
+.nav-pill:hover, .nav-pill.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.nav-pill svg { width: 14px; height: 14px; }
+
+.main { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+.section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    cursor: pointer;
+    background: linear-gradient(to right, var(--card-bg), #fafaf8);
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.section-header:hover { background: linear-gradient(to right, #fafaf8, #f5f5f2); }
+.section.open .section-header { border-bottom-color: var(--border); }
+
+.section-title { display: flex; align-items: center; gap: 0.75rem; }
+
+.section-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.section-icon svg { width: 18px; height: 18px; }
+.section-icon.blue { background: #e3f2fd; color: #1976d2; }
+.section-icon.green { background: #e8f5e9; color: #388e3c; }
+.section-icon.orange { background: #fff3e0; color: #f57c00; }
+.section-icon.purple { background: #f3e5f5; color: #7b1fa2; }
+.section-icon.red { background: #ffebee; color: #c62828; }
+.section-icon.teal { background: #e0f2f1; color: #00796b; }
+
+.section-title h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.toggle-icon {
+    width: 24px; height: 24px; color: var(--text-light);
+    transition: transform 0.3s ease; flex-shrink: 0;
+}
+.section.open .toggle-icon { transform: rotate(180deg); }
+
+.section-content {
+    display: none; padding: 1rem; animation: fadeIn 0.3s ease;
+}
+.section.open .section-content { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.parties-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+@media (min-width: 500px) { .parties-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+.party-card {
+    padding: 0.85rem; border-radius: 8px; border: 1px solid var(--border);
+}
+.party-card.claimants { background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-color: #c8e6c9; }
+.party-card.respondents { background: linear-gradient(135deg, #ffebee 0%, #fce4ec 100%); border-color: #ffcdd2; }
+.party-card.third { background: linear-gradient(135deg, #e3f2fd 0%, #e8eaf6 100%); border-color: #bbdefb; }
+
+.party-label {
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.5px; margin-bottom: 0.4rem;
+}
+.party-card.claimants .party-label { color: #2e7d32; }
+.party-card.respondents .party-label { color: #c62828; }
+.party-card.third .party-label { color: #1565c0; }
+
+.party-name { font-weight: 500; font-size: 0.9rem; margin-bottom: 0.15rem; }
+.party-role { font-size: 0.78rem; color: var(--text-light); }
+
+.decision-box {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white; padding: 1.25rem; border-radius: 10px; margin-bottom: 1rem;
+}
+.decision-label {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.5px; margin-bottom: 0.75rem; color: var(--accent-light);
+}
+.decision-label svg { width: 16px; height: 16px; }
+.decision-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 600; line-height: 1.5;
+}
+
+.info-list { list-style: none; }
+.info-item {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    padding: 0.75rem 0; border-bottom: 1px solid var(--border);
+}
+.info-item:last-child { border-bottom: none; }
+.info-bullet {
+    width: 6px; height: 6px; background: var(--accent);
+    border-radius: 50%; margin-top: 0.5rem; flex-shrink: 0;
+}
+.info-text { font-size: 0.9rem; }
+.info-text strong { color: var(--primary); }
+
+.key-points { display: grid; gap: 0.75rem; }
+.key-point {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    padding: 0.75rem; background: var(--bg); border-radius: 8px;
+    border-left: 3px solid var(--accent);
+}
+.key-point-num {
+    width: 24px; height: 24px; background: var(--accent); color: var(--primary);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
+}
+.key-point-text { font-size: 0.9rem; }
+
+.evidence-table { width: 100%; border-collapse: collapse; }
+.evidence-table th, .evidence-table td {
+    padding: 0.65rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.85rem;
+}
+.evidence-table th { background: var(--bg); font-weight: 600; color: var(--primary); }
+.evidence-table tr:last-child td { border-bottom: none; }
+
+.quote-block {
+    border-left: 3px solid var(--accent); padding: 0.75rem 1rem;
+    background: var(--bg); font-style: italic; margin: 1rem 0; border-radius: 0 8px 8px 0;
+}
+.quote-source { font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem; font-style: normal; }
+
+.timeline { position: relative; padding-left: 1.5rem; }
+.timeline::before {
+    content: ''; position: absolute; left: 5px; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+}
+.timeline-item { position: relative; padding-bottom: 1.25rem; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-dot {
+    position: absolute; left: -1.5rem; top: 0.25rem;
+    width: 12px; height: 12px; border-radius: 50%; background: var(--accent);
+    border: 2px solid var(--card-bg); box-shadow: 0 0 0 2px var(--accent);
+}
+.timeline-date { font-size: 0.75rem; font-weight: 600; color: var(--accent); margin-bottom: 0.25rem; }
+.timeline-text { font-size: 0.9rem; }
+
+.amount-highlight {
+    display: inline-block; background: linear-gradient(120deg, var(--accent-light) 0%, var(--accent-light) 100%);
+    background-repeat: no-repeat; background-size: 100% 40%; background-position: 0 90%;
+    font-weight: 600;
+}
+
+.status-badge {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.35rem 0.7rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;
+}
+.status-badge.approved { background: #e8f5e9; color: #2e7d32; }
+.status-badge.partial { background: #fff3e0; color: #e65100; }
+.status-badge.reserved { background: #e3f2fd; color: #1565c0; }
+.status-badge svg { width: 12px; height: 12px; }
+
+.divider { height: 1px; background: var(--border); margin: 1rem 0; }
+
+.footer {
+    text-align: center; padding: 1.5rem 1rem; font-size: 0.8rem;
+    color: var(--text-light); border-top: 1px solid var(--border); margin-top: 1rem;
+}
+
+.scroll-top {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    width: 44px; height: 44px; background: var(--primary); color: white;
+    border: none; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    opacity: 0; visibility: hidden; transition: all 0.3s ease;
+}
+.scroll-top.visible { opacity: 1; visibility: visible; }
+.scroll-top:hover { background: var(--secondary); transform: translateY(-2px); }
+.scroll-top svg { width: 20px; height: 20px; }
+
+.sub-label {
+    font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.5px; color: var(--text-light); margin-bottom: 0.5rem; margin-top: 1rem;
+}
+.sub-label:first-child { margin-top: 0; }
+
+p.body-text { font-size: 0.9rem; margin-bottom: 0.75rem; }
+p.body-text:last-child { margin-bottom: 0; }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-content">
+        <span class="case-badge">ДЕЛО № А23-9380/2024</span>
+        <h1>Рефтинская ГРЭС: замена поставщика и мировое соглашение</h1>
+        <div class="header-meta">Санкт-Петербург • Март 2026 • Договор № СИБЭРСИБЭМ-20/1044</div>
+    </div>
+</header>
+
+<nav class="nav-container">
+    <div class="nav-pills">
+        <button class="nav-pill active" onclick="scrollToSection('essence')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"/></svg>
+            Суть сделки
+        </button>
+        <button class="nav-pill" onclick="scrollToSection('parties')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>
+            Стороны
+        </button>
+        <button class="nav-pill" onclick="scrollToSection('price')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+            Цена и расчёты
+        </button>
+        <button class="nav-pill" onclick="scrollToSection('penalty')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>
+            Неустойка
+        </button>
+        <button class="nav-pill" onclick="scrollToSection('offsets')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/></svg>
+            Зачёты
+        </button>
+        <button class="nav-pill" onclick="scrollToSection('liability')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+            Ответственность
+        </button>
+        <button class="nav-pill" onclick="scrollToSection('settlement')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z"/></svg>
+            Мировое соглашение
+        </button>
+        <button class="nav-pill" onclick="scrollToSection('calendar')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 9v9"/></svg>
+            Ключевые даты
+        </button>
+    </div>
+</nav>
+
+<main class="main">
+
+    <!-- СУТЬ СДЕЛКИ -->
+    <section id="essence" class="section open">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-title">
+                <div class="section-icon blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"/></svg>
+                </div>
+                <h2>Суть сделки</h2>
+            </div>
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+        <div class="section-content">
+            <div class="decision-box">
+                <div class="decision-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+                    ОБЩАЯ КОНСТРУКЦИЯ
+                </div>
+                <div class="decision-text">
+                    Калужский турбинный завод (КТЗ) передаёт «Силовым машинам» все права и обязанности по договору на изготовление и поставку турбинного оборудования для модернизации Рефтинской ГРЭС (ТГ-1 и ТГ-4). Параллельно стороны заключают мировое соглашение по делу № А23-9380/2024 о взыскании неустойки. Оба документа вступают в силу одновременно с утверждением мирового соглашения судом.
+                </div>
+            </div>
+
+            <p class="body-text">Пакет документов включает два ключевых соглашения, оформляющих единую сделку по реструктуризации поставки оборудования для проекта модернизации Рефтинской ГРЭС.</p>
+
+            <div class="key-points">
+                <div class="key-point">
+                    <div class="key-point-num">1</div>
+                    <div class="key-point-text"><strong>Соглашение о замене стороны</strong> по Договору № СИБЭРСИБЭМ-20/1044 от 26.11.2020: КТЗ (первоначальный поставщик) передаёт «Силовым машинам» (новый поставщик) полный объём прав и обязательств по договору на изготовление турбин К-315-23,5-Р для двух энергоблоков.</div>
+                </div>
+                <div class="key-point">
+                    <div class="key-point-num">2</div>
+                    <div class="key-point-text"><strong>Мировое соглашение</strong> по делу № А23-9380/2024 (АС Калужской области): урегулирование спора о взыскании неустойки в размере 635,9 млн руб. за просрочку поставки оборудования. КТЗ признаёт 150 млн руб. из заявленной суммы, от остальных 485,9 млн руб. Покупатель отказывается.</div>
+                </div>
+                <div class="key-point">
+                    <div class="key-point-num">3</div>
+                    <div class="key-point-text"><strong>Условие вступления в силу:</strong> оба документа вступают в силу с даты вступления в законную силу определения АС Калужской области об утверждении мирового соглашения.</div>
+                </div>
+            </div>
+
+            <p class="body-text" style="margin-top: 1rem;">Дополнительно между сторонами подписывается ряд сопутствующих документов: ДС № 9 к договору СИБЭРСИБЭМ-21/4546, ДС к договорам ТУГРЭС-25/1515 и СИБЭРСИБЭМ-25-9101 (между СибЭР и «Силовыми машинами»), а также соглашение о расторжении договора № 61446 (между КТЗ и «Силовыми машинами»).</p>
+        </div>
+    </section>
+
+    <!-- СТОРОНЫ -->
+    <section id="parties" class="section open">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-title">
+                <div class="section-icon green">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>
+                </div>
+                <h2>Стороны</h2>
+            </div>
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+        <div class="section-content">
+            <div class="parties-grid">
+                <div class="party-card claimants">
+                    <div class="party-label">Покупатель / Истец</div>
+                    <div class="party-name">АО «Сибирьэнергоремонт»</div>
+                    <div class="party-role">Ген. директор В.В. Ермолаев</div>
+                    <div class="party-role">г. Красноярск</div>
+                </div>
+                <div class="party-card respondents">
+                    <div class="party-label">Первоначальный поставщик / Ответчик</div>
+                    <div class="party-name">ПАО «Калужский турбинный завод»</div>
+                    <div class="party-role">Ген. директор И.С. Сербин</div>
+                    <div class="party-role">г. Калуга</div>
+                </div>
+                <div class="party-card third">
+                    <div class="party-label">Новый поставщик / Третье лицо</div>
+                    <div class="party-name">АО «Силовые машины»</div>
+                    <div class="party-role">Ген. директор А.В. Подколзин</div>
+                    <div class="party-role">г. Санкт-Петербург</div>
+                </div>
+            </div>
+            <p class="body-text" style="margin-top: 1rem;">Сделка оформлена во исполнение Соглашения о намерениях № 1 от 16.01.2026. Каждая сторона даёт взаимные заверения об отсутствии банкротства, ликвидации, ограничений полномочий и правовых препятствий.</p>
+        </div>
+    </section>
+
+    <!-- ЦЕНА И РАСЧЁТЫ -->
+    <section id="price" class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-title">
+                <div class="section-icon orange">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                </div>
+                <h2>Цена и порядок расчётов</h2>
+            </div>
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+        <div class="section-content">
+            <div class="sub-label">Новая цена оборудования (без НДС)</div>
+            <table class="evidence-table">
+                <thead>
+                    <tr><th>Проект</th><th>Цена</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Рефтинская ГРЭС (ТГ-1)</td><td><span class="amount-highlight">1 374 450 000 руб.</span></td></tr>
+                    <tr><td>Рефтинская ГРЭС (ТГ-4)</td><td><span class="amount-highlight">1 451 043 860 руб.</span></td></tr>
+                    <tr><td><strong>Итого</strong></td><td><strong>2 825 493 860 руб.</strong></td></tr>
+                </tbody>
+            </table>
+
+            <div class="sub-label">Расчёты по ТГ-1</div>
+            <table class="evidence-table">
+                <thead><tr><th>Этап</th><th>Сумма (без НДС)</th><th>Срок</th></tr></thead>
+                <tbody>
+                    <tr><td>Аванс 1 (выплачен КТЗ)</td><td>408 000 000 руб.</td><td>14.01.2022</td></tr>
+                    <tr><td>Аванс 2 (выплачен КТЗ)</td><td>285 292 500 руб.</td><td>22.07.2022</td></tr>
+                    <tr><td>Аванс 3 (новый)</td><td>13 865 850 руб.</td><td>до 03.04.2026</td></tr>
+                    <tr><td>Аванс 4 (зачёт неустойки)</td><td>122 950 819,67 руб.</td><td>до 10.04.2026</td></tr>
+                    <tr><td>Платёж по приёмке</td><td>376 907 830,33 руб.</td><td>10 р.д. после приёмки</td></tr>
+                    <tr><td>Гарантийный платёж</td><td>134 113 000 руб.</td><td>10 р.д. после ввода</td></tr>
+                    <tr><td>Шеф-надзор</td><td>33 320 000 руб.</td><td>15 р.д. после акта</td></tr>
+                </tbody>
+            </table>
+
+            <div class="sub-label">Расчёты по ТГ-4</div>
+            <table class="evidence-table">
+                <thead><tr><th>Этап</th><th>Сумма (без НДС)</th><th>Срок</th></tr></thead>
+                <tbody>
+                    <tr><td>Аванс 1 (выплачен КТЗ)</td><td>769 204 000 руб.</td><td>22.07.2022</td></tr>
+                    <tr><td>Аванс 2 (новый)</td><td>15 384 080 руб.</td><td>до 03.04.2026</td></tr>
+                    <tr><td>Платёж по приёмке</td><td>491 363 394 руб.</td><td>10 р.д. после приёмки</td></tr>
+                    <tr><td>Гарантийный платёж</td><td>141 772 386 руб.</td><td>10 р.д. после ввода</td></tr>
+                    <tr><td>Шеф-надзор</td><td>33 320 000 руб.</td><td>15 р.д. после акта</td></tr>
+                </tbody>
+            </table>
+
+            <p class="body-text" style="margin-top: 1rem;">Авансовый платёж 4 по ТГ-1 (122 950 819,67 руб.) погашается путём зачёта признанной неустойки в 150 млн руб. С момента вступления Соглашения в силу данный аванс и задолженность по неустойке считаются оплаченными. Цены по спецификациям носят конфиденциальный характер и не применяются к иным договорным отношениям.</p>
+        </div>
+    </section>
+
+    <!-- НЕУСТОЙКА -->
+    <section id="penalty" class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-title">
+                <div class="section-icon red">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>
+                </div>
+                <h2>Урегулирование неустойки</h2>
+            </div>
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+        <div class="section-content">
+            <table class="evidence-table">
+                <thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+                <tbody>
+                    <tr><td>Заявлено в иске</td><td><span class="amount-highlight">635 943 344,40 руб.</span></td></tr>
+                    <tr><td>Признано КТЗ и «Силовыми машинами»</td><td><span class="amount-highlight">150 000 000 руб.</span></td></tr>
+                    <tr><td>Отказ истца от остатка</td><td>485 943 344,40 руб.</td></tr>
+                    <tr><td>Механизм погашения</td><td>Зачёт в счёт аванса 4 по ТГ-1</td></tr>
+                </tbody>
+            </table>
+
+            <p class="body-text" style="margin-top: 1rem;">«Силовые машины» как правопреемник по договору принимают на себя обязательство по уплате признанных 150 млн руб. на основании ст. 391, 392.3 ГК РФ. Покупатель признаёт данную сумму достаточной и соразмерной. Все иные требования за нарушения, допущенные КТЗ до вступления Соглашения в силу (неустойки, штрафы, проценты, убытки, включая непредъявленные), считаются полностью урегулированными.</p>
+
+            <div class="sub-label">Новый режим неустойки (после замены стороны)</div>
+            <ul class="info-list">
+                <li class="info-item">
+                    <div class="info-bullet"></div>
+                    <div class="info-text"><strong>Просрочка поставки (п. 8.4):</strong> 0,1% от стоимости партии оборудования за каждый день просрочки. Начисление безусловное, не зависит от наличия убытков, переноса сроков Правительством РФ или применения штрафов со стороны организаций ОРЭМ.</div>
+                </li>
+                <li class="info-item">
+                    <div class="info-bullet"></div>
+                    <div class="info-text"><strong>Просрочка работ (п. 8.5):</strong> 0,02% за каждый день начиная с 30-го дня просрочки (при задержке до 60 дней). Свыше 60 дней от срока: 0,1% за каждый день.</div>
+                </li>
+                <li class="info-item">
+                    <div class="info-bullet"></div>
+                    <div class="info-text"><strong>Запрет возражений:</strong> Новый поставщик не вправе ссылаться на отсутствие вины, отсутствие причинно-следственной связи с датой начала поставки мощности на ОРЭМ или иные основания для снижения неустойки.</div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ЗАЧЁТЫ -->
+    <section id="offsets" class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-title">
+                <div class="section-icon purple">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/></svg>
+                </div>
+                <h2>Взаиморасчёты КТЗ и «Силовых машин»</h2>
+            </div>
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+        <div class="section-content">
+            <p class="body-text">Раздел 3 Соглашения о замене стороны регулирует передачу ранее полученных авансов и взаимозачёт встречных требований между КТЗ и «Силовыми машинами».</p>
+
+            <div class="sub-label">Обязательства КТЗ перед «Силовыми машинами»</div>
+            <table class="evidence-table">
+                <thead><tr><th>Обязательство</th><th>Сумма (с НДС)</th></tr></thead>
+                <tbody>
+                    <tr><td>Перечисление аванса, полученного от СибЭР</td><td>1 754 995 800 руб.</td></tr>
+                    <tr><td>Вознаграждение за передачу прав</td><td>100 000 руб.</td></tr>
+                    <tr><td><strong>Итого обязательств КТЗ</strong></td><td><strong>1 755 095 800 руб.</strong></td></tr>
+                </tbody>
+            </table>
+
+            <div class="sub-label">Обязательства «Силовых машин» перед КТЗ</div>
+            <table class="evidence-table">
+                <thead><tr><th>Обязательство</th><th>Сумма (с НДС)</th></tr></thead>
+                <tbody>
+                    <tr><td>Возврат неотработанного аванса по договору № 61446</td><td>1 675 304 316 руб.</td></tr>
+                    <tr><td>Неустойка за просрочку по договору № 61446</td><td>50 183 956,26 руб.</td></tr>
+                    <tr><td><strong>Итого обязательств СМ</strong></td><td><strong>1 725 488 272,26 руб.</strong></td></tr>
+                </tbody>
+            </table>
+
+            <div class="sub-label">Результат зачёта</div>
+            <div class="decision-box">
+                <div class="decision-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25v-.008ZM12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Z"/></svg>
+                    САЛЬДО ЗАЧЁТА
+                </div>
+                <div class="decision-text">
+                    После проведения зачёта КТЗ обязан доплатить «Силовым машинам» остаток в размере 29 607 527,74 руб. (с НДС) в течение 10 рабочих дней с даты вступления Соглашения в силу. Просрочка: неустойка 0,5% в день.
+                </div>
+            </div>
+            <p class="body-text">«Силовые машины» подтверждают, что не будут предъявлять к КТЗ требования о компенсации сумм неустоек, выплаченных Покупателю по п. 2.1.6 Соглашения и мировому соглашению.</p>
+        </div>
+    </section>
+
+    <!-- ОТВЕТСТВЕННОСТЬ И ОБЕСПЕЧЕНИЕ -->
+    <section id="liability" class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-title">
+                <div class="section-icon teal">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+                </div>
+                <h2>Ответственность и обеспечение</h2>
+            </div>
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+        <div class="section-content">
+            <div class="sub-label">Кэп ответственности (п. 8.17 Договора, новая редакция)</div>
+            <div class="quote-block">
+                Общий совокупный максимальный размер ответственности каждой Стороны по Договору (убытки, неустойки, пени, штрафы, проценты, потери, ответственность перед третьими лицами) не может превышать <strong>50% стоимости оборудования с НДС</strong>. Упущенная выгода возмещению не подлежит.
+                <div class="quote-source">п. 2.1.9 Соглашения о замене стороны</div>
+            </div>
+
+            <div class="sub-label">Замена обеспечительных инструментов</div>
+            <ul class="info-list">
+                <li class="info-item">
+                    <div class="info-bullet"></div>
+                    <div class="info-text"><strong>Банковские гарантии АБ «РОССИЯ»</strong> (№ 00.19-2/09/021-8/21 и 00.19-2/09/021-9/21): Покупатель направляет уведомление об отказе от прав до 31.03.2026.</div>
+                </li>
+                <li class="info-item">
+                    <div class="info-bullet"></div>
+                    <div class="info-text"><strong>Поручительство ООО «Севергрупп»</strong> (от 28.12.2021): расторгается до 30.04.2026.</div>
+                </li>
+                <li class="info-item">
+                    <div class="info-bullet"></div>
+                    <div class="info-text"><strong>Новые банковские гарантии «Силовых машин»:</strong> оформляются до 30.04.2026 на суммы выплаченных авансов (с НДС). Срок действия: дата поставки + 60 календарных дней по каждому проекту.</div>
+                </li>
+            </ul>
+
+            <div class="sub-label">Заверения об обстоятельствах (раздел 4)</div>
+            <p class="body-text">Каждая сторона даёт стандартные заверения (правоспособность, полномочия, отсутствие банкротства, корпоративное одобрение, ненарушение обязательств перед третьими лицами). Штраф за недостоверные заверения: 100 000 руб. за каждый случай плюс документально подтверждённые убытки. Дополнительная санкция: лишение права ссылаться на документы, не переданные другой стороне в течение 120 дней.</p>
+        </div>
+    </section>
+
+    <!-- МИРОВОЕ СОГЛАШЕНИЕ -->
+    <section id="settlement" class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-title">
+                <div class="section-icon blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z"/></svg>
+                </div>
+                <h2>Мировое соглашение: ключевые условия</h2>
+            </div>
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+        <div class="section-content">
+            <div class="key-points">
+                <div class="key-point">
+                    <div class="key-point-num">1</div>
+                    <div class="key-point-text"><strong>Признание 150 млн руб.</strong> КТЗ (Ответчик) признаёт обоснованность неустойки на эту сумму. «Силовые машины» (Третье лицо) как правопреемник принимают обязательство по её уплате.</div>
+                </div>
+                <div class="key-point">
+                    <div class="key-point-num">2</div>
+                    <div class="key-point-text"><strong>Зачёт.</strong> Обязательство «Силовых машин» по уплате 150 млн руб. прекращается зачётом в счёт авансового платежа Покупателя по п. 7.1.4 ДС № 4 (ст. 410 ГК РФ).</div>
+                </div>
+                <div class="key-point">
+                    <div class="key-point-num">3</div>
+                    <div class="key-point-text"><strong>Отказ от остатка.</strong> Истец отказывается от оставшихся 485 943 344,40 руб. исковых требований.</div>
+                </div>
+                <div class="key-point">
+                    <div class="key-point-num">4</div>
+                    <div class="key-point-text"><strong>Подтверждение исполнения.</strong> Ответчик и Третье лицо признают, что все встречные обязательства Покупателя по Договору (авансы, документация, иные действия) выполнены в полном объёме.</div>
+                </div>
+            </div>
+
+            <div class="sub-label">Судебные расходы</div>
+            <table class="evidence-table">
+                <thead><tr><th>Статья расходов</th><th>Сумма</th><th>Распределение</th></tr></thead>
+                <tbody>
+                    <tr><td>Госпошлина</td><td>3 654 717 руб.</td><td>70% (2 558 301,90) из бюджета; 30% (1 096 415,10) возмещается: КТЗ 365 471,70, СМ 365 471,70, остаток на Истце</td></tr>
+                    <tr><td>Представители</td><td>1 521 149,65 руб.</td><td>КТЗ: 507 049,88 руб., СМ: 507 049,88 руб., остаток на Истце</td></tr>
+                    <tr><td>Прочие издержки</td><td>по факту</td><td>Каждая сторона несёт самостоятельно</td></tr>
+                </tbody>
+            </table>
+            <p class="body-text" style="margin-top: 0.75rem;">Возмещение производится в течение 14 рабочих дней с даты утверждения мирового соглашения. В случае неисполнения мировое соглашение подлежит принудительному исполнению по разделу VII АПК РФ.</p>
+        </div>
+    </section>
+
+    <!-- КЛЮЧЕВЫЕ ДАТЫ -->
+    <section id="calendar" class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+            <div class="section-title">
+                <div class="section-icon teal">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 9v9"/></svg>
+                </div>
+                <h2>Ключевые даты и сроки</h2>
+            </div>
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+        <div class="section-content">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">16.01.2026</div>
+                    <div class="timeline-text">Соглашение о намерениях № 1</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Март 2026</div>
+                    <div class="timeline-text">Подписание Соглашения о замене стороны и мирового соглашения</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">До 31.03.2026</div>
+                    <div class="timeline-text">Уведомление об отказе от банковских гарантий АБ «РОССИЯ»</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">До 03.04.2026</div>
+                    <div class="timeline-text">Авансовые платежи: 13,9 млн руб. (ТГ-1) + 15,4 млн руб. (ТГ-4)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">До 10.04.2026</div>
+                    <div class="timeline-text">Зачёт авансового платежа 4 по ТГ-1 (122,9 млн руб. = погашение неустойки 150 млн + остаток)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">10 р.д. после вступления в силу</div>
+                    <div class="timeline-text">КТЗ перечисляет «Силовым машинам» остаток 29,6 млн руб.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">14 р.д. после утверждения</div>
+                    <div class="timeline-text">Возмещение судебных расходов (госпошлина + представители)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">30 дней после вступления в силу</div>
+                    <div class="timeline-text">ДС к Договору по приведению НДС в соответствие с действующим законодательством</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">До 30.04.2026</div>
+                    <div class="timeline-text">Расторжение поручительства «Севергрупп»; оформление новых банковских гарантий «Силовыми машинами»</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">60 дней после вступления в силу</div>
+                    <div class="timeline-text">«Силовые машины» направляют реестр имеющихся документов по Договору</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">120 дней после вступления в силу</div>
+                    <div class="timeline-text">Дедлайн передачи отсутствующих документов (санкция: утрата права ссылаться на непереданные документы)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">30.06.2026</div>
+                    <div class="timeline-text"><strong>Поставка оборудования: Рефтинская ГРЭС (ТГ-1)</strong></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">30.12.2026</div>
+                    <div class="timeline-text"><strong>Поставка оборудования: Рефтинская ГРЭС (ТГ-4)</strong></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    Резюме подготовлено на основании Соглашения о замене стороны по Договору № СИБЭРСИБЭМ-20/1044 и проекта мирового соглашения по делу № А23-9380/2024 • Март 2026
+</footer>
+
+<button class="scroll-top" onclick="scrollToTop()">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/></svg>
+</button>
+
+<script>
+function toggleSection(header) {
+    const section = header.closest('.section');
+    section.classList.toggle('open');
+}
+
+function scrollToSection(id) {
+    const section = document.getElementById(id);
+    if (section) {
+        if (!section.classList.contains('open')) section.classList.add('open');
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        const navHeight = document.querySelector('.nav-container').offsetHeight;
+        const offset = headerHeight + navHeight + 10;
+        const top = section.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+        document.querySelectorAll('.nav-pill').forEach(pill => pill.classList.remove('active'));
+        event.target.closest('.nav-pill').classList.add('active');
+    }
+}
+
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+window.addEventListener('scroll', () => {
+    const scrollBtn = document.querySelector('.scroll-top');
+    if (window.pageYOffset > 300) scrollBtn.classList.add('visible');
+    else scrollBtn.classList.remove('visible');
+});
+
+window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('.section');
+    const navPills = document.querySelectorAll('.nav-pill');
+    const headerHeight = document.querySelector('.header').offsetHeight;
+    const navHeight = document.querySelector('.nav-container').offsetHeight;
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - headerHeight - navHeight - 50;
+        if (window.pageYOffset >= sectionTop) current = section.getAttribute('id');
+    });
+    navPills.forEach(pill => {
+        pill.classList.remove('active');
+        if (pill.getAttribute('onclick')?.includes(current)) pill.classList.add('active');
+    });
+});
+</script>
+
+</body>
+</html>
