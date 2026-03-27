@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Резюме | Рефтинская ГРЭС — Замена поставщика и мировое соглашение</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="СГС Резюме">
+    <meta name="theme-color" content="#1a2a3a">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
 :root {
@@ -290,6 +296,11 @@ body {
 .scroll-top.visible { opacity: 1; visibility: visible; }
 .scroll-top:hover { background: var(--secondary); transform: translateY(-2px); }
 .scroll-top svg { width: 20px; height: 20px; }
+
+@media (max-width: 768px) {
+    .header { position: static; }
+    .nav-container { position: static; }
+}
 
 .sub-label {
     font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
@@ -754,13 +765,13 @@ function toggleSection(header) {
     section.classList.toggle('open');
 }
 
+function isMobile() { return window.innerWidth <= 768; }
+
 function scrollToSection(id) {
     const section = document.getElementById(id);
     if (section) {
         if (!section.classList.contains('open')) section.classList.add('open');
-        const headerHeight = document.querySelector('.header').offsetHeight;
-        const navHeight = document.querySelector('.nav-container').offsetHeight;
-        const offset = headerHeight + navHeight + 10;
+        const offset = isMobile() ? 10 : document.querySelector('.header').offsetHeight + document.querySelector('.nav-container').offsetHeight + 10;
         const top = section.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({ top, behavior: 'smooth' });
         document.querySelectorAll('.nav-pill').forEach(pill => pill.classList.remove('active'));
@@ -791,6 +802,11 @@ window.addEventListener('scroll', () => {
         if (pill.getAttribute('onclick')?.includes(current)) pill.classList.add('active');
     });
 });
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+}
 </script>
 
 </body>
